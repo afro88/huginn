@@ -20,3 +20,7 @@ else
   echo "  Restoring stored assets"
   ln -s "${STORED_ASSETS}" "${LIVE_ASSETS}"
 fi
+
+echo " Symlinking Openshift Procfile at ${OPENSHIFT_REPO_DIR}/.openshift/custom/Procfile"
+rm ${OPENSHIFT_REPO_DIR}/Procfile
+ln -s ${OPENSHIFT_REPO_DIR}/.openshift/custom/Procfile ${OPENSHIFT_REPO_DIR}/Procfile
