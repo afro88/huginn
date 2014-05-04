@@ -1,0 +1,64 @@
+<h3>Add Artist</h3>
+
+<h4 id='event-creation-status'></h4>
+
+<%= form_tag handle_details_post_agent_path(@agent), :id => "create-event-form" do %>
+  <div class="form-group">
+    <label for="artist_name">Artist Name</label>
+    <input type="text" id="artist_name" name="artist_name" class="form-control">
+  </div>
+
+  <div class="input-group">
+    <label for="beatport">Beatport URL</label>
+    <span class="input-group-addon">
+      <input type="checkbox" id="beatport_x" name="beatport_x" checked>
+    </span>
+    <input type="text" id="beatport" name="beatport" class="form-control">
+  </div>
+
+  <div class="input-group">
+    <label for="soundcloud">SoundCloud Username</label>
+    <span class="input-group-addon">
+      <input type="checkbox" id="soundcloud_x" name="soundcloud_x" checked>
+    </span>
+    <input type="text" id="soundcloud" name="soundcloud" class="form-control">
+  </div>
+
+  <div class="input-group">
+    <label for="boilerroom">Boiler Room</label>
+    <span class="input-group-addon">
+      <input type="checkbox" id="boilerroom_x" name="boilerroom_x" checked>
+    </span>
+    <input type="text" id="boilerroom" name="boilerroom" class="form-control">
+  </div>
+
+  <div class='form-actions' style='clear: both'>
+    <%= submit_tag "Submit", :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script>
+  $(function () {
+    $("#create-event-form").submit(function (e) {
+      e.preventDefault();
+      var $form = $("#create-event-form");
+      var $status = $("#event-creation-status");
+      $.ajax({
+        url: $form.attr('action'),
+        method: "post",
+        data: $form.serialize(),
+        dataType: "JSON",
+        success: function(json) {
+          if (json.success) {
+            $status.text("Artist added");
+          } else {
+            $status.text("An error occurred: " + json.error);
+          }
+        },
+        error: function(response) {
+          $status.text("An error occurred: " + response.responseText)
+        }
+      });
+    });
+  });
+</script>
