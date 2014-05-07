@@ -72,6 +72,8 @@ gem 'xmpp4r',  '~> 0.5.6'
 
 gem 'therubyracer', '~> 0.12.1'
 
+gem 'koala', '~> 1.8.0rc1'
+
 group :development do
   gem 'binding_of_caller'
   gem 'better_errors'
